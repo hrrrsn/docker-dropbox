@@ -66,4 +66,4 @@ fi
 
 echo "Starting dropboxd ($(cat /opt/dropbox/VERSION))..."
 umask 002
-exec su /opt/dropbox-filesystem-fix/dropbox_start.py
+exec su dropbox -s /bin/bash -c "python /opt/dropbox-filesystem-fix/dropbox_start.py"
