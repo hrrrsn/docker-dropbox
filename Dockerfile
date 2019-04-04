@@ -28,7 +28,7 @@ USER root
 ADD ./dropbox-filesystem-fix/* /tmp/dropbox-filesystem-fix/
 WORKDIR /tmp/dropbox-filesystem-fix
 RUN make \
-    && sudo mv /tmp/dropbox-filesystem-fix /opt/ \
+    && mv /tmp/dropbox-filesystem-fix /opt/ \
     && chmod +x /opt/dropbox-filesystem-fix/dropbox_start.py
 WORKDIR /
 
@@ -57,7 +57,7 @@ COPY dropbox /usr/bin/dropbox
 # LD_PRELOAD path properly. The run script executes `dropbox` not `/usr/bin/dropbox`, so this means that the
 # actual execution order will be:
 #     /root/run -> /usr/local/bin/dropbox -> /usr/bin/dropbox -> /usr/bin/dropbox-cli
-RUN [ "$(which dropbox)" = "/opt/dropbox-filesystem-fix/dropbox_start.py" ]
+RUN [ "$(which dropbox)" = "/usr/bin/dropbox" ]
 
 RUN /usr/bin/dropbox-cli autostart n
 
